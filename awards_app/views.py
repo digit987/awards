@@ -28,13 +28,13 @@ class UserView(APIView):
         if user_id:
             try:
                 user = User.objects.filter(user_id=user_id).values('user_id','name', 'email', 'phone', 'location', 'picture', 'awards')
-                return JsonResponse(list(pizza_specification), safe=False)
+                return JsonResponse(list(user), safe=False)
             except:
                 return JsonResponse({"error": "Data couldn't be found"}, status=status.HTTP_400_BAD_REQUEST)
         else:
             try:
-                pizza_specification = PizzaSpecification.objects.all().values('pizza_size','pizza_toppings')
-                return JsonResponse(list(pizza_specification), safe=False)
+                user = User.objects.all().values('user_id','name', 'email', 'phone', 'location', 'picture', 'awards')
+                return JsonResponse(list(user), safe=False)
             except:
                 return JsonResponse({"error": "Data couldn't be found"}, status=status.HTTP_400_BAD_REQUEST)
 
